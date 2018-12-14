@@ -100,6 +100,15 @@ module.exports = (options = {}, argv = {}) => {
         },
 
         /**
+         * The externals configuration option provides a way of excluding dependencies from the output bundles.
+         *
+         * See: https://webpack.js.org/configuration/externals/
+         */
+        externals: {
+            jquery: 'jQuery'
+        },
+
+        /**
          * Configuration regarding modules.
          *
          * See: https://webpack.js.org/configuration/module/
