@@ -25,7 +25,19 @@
   ],
   "main": "dist/jquery.resizableColumns.js",
   "scripts": {
+    "build:dev": "webpack --mode=development --config webpack.config.js --progress --profile --bail",
+    "build:prod": "webpack --mode=production --config webpack.config.js --progress --profile --bail --display-optimization-bailout",
+    "build": "npm run build:prod",
+    "clean": "rimraf -- dist",
+    "clean:all": "npm run clean && rimraf -- node_modules package-lock.json"
+  },
+  "peerDependencies": {
+    "jquery": ">=1.9.0"
   },
   "devDependencies": {
+    "jquery": "3.3.1",
+    "rimraf": "2.6.2",
+    "webpack": "4.27.1",
+    "webpack-cli": "3.1.2"
   }
 }
