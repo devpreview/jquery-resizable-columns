@@ -1,0 +1,3 @@
+.rc-handle-container{position:relative}.rc-handle{position:absolute;width:7px;margin-left:-3px;z-index:2}.rc-handle,table.rc-table-resizing,table.rc-table-resizing thead,table.rc-table-resizing thead>th,table.rc-table-resizing thead>th>a{cursor:ew-resize}
+
+/*# sourceMappingURL=jquery.resizableColumns.min.css.map*/

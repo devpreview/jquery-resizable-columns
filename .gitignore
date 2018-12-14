@@ -4,4 +4,4 @@
 # IDEA
 /.idea
 # Build
-/dist/
+/dist/*.dev.*
