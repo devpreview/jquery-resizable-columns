@@ -23,6 +23,8 @@
     "resizable",
     "adam becker"
   ],
+  "style": "dist/jquery.resizableColumns.min.css",
+  "sass": "src/index.scss",
   "main": "dist/jquery.resizableColumns.min.js",
   "scripts": {
     "prebuild:dev": "npm run clean:dev",
