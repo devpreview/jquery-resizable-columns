@@ -26,6 +26,7 @@
   "style": "dist/jquery.resizableColumns.min.css",
   "sass": "src/index.scss",
   "main": "dist/jquery.resizableColumns.min.js",
+  "typings": "./index.d.ts",
   "scripts": {
     "prebuild:dev": "npm run clean:dev",
     "prebuild:prod": "npm run clean:prod",
