@@ -1,3 +1,4 @@
+import './index.scss';
 import ResizableColumns from './class';
 import adapter from './adapter';
 

@@ -17,6 +17,11 @@ const helpers = {
 };
 
 /**
+ * Webpack Plugins
+ */
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
+/**
  * Webpack configuration
  *
  * See: https://webpack.js.org/configuration/
@@ -93,6 +98,87 @@ module.exports = (options = {}, argv = {}) => {
              */
             path: helpers.root('dist')
         },
+
+        /**
+         * Configuration regarding modules.
+         *
+         * See: https://webpack.js.org/configuration/module/
+         */
+        module: {
+            /**
+             * Rules for modules (configure loaders, parser options, etc.)
+             *
+             * See: https://webpack.js.org/configuration/module/#module-rules
+             */
+            rules: [
+                /**
+                 * SASS Loader.
+                 *
+                 * See: https://github.com/webpack-contrib/sass-loader
+                 */
+                {
+                    test: /\.s?[ac]ss$/,
+                    use: [
+                        /*options.mode === 'production' ? MiniCssExtractPlugin.loader : 'style-loader',*/
+                        MiniCssExtractPlugin.loader,
+                        {
+                            loader: "css-loader",
+                            options: {
+                                sourceMap: true
+                            }
+                        },
+                        {
+                            loader: 'postcss-loader', // Run post css actions
+                            options: {
+                                sourceMap: true,
+                                plugins: (loader) => {
+                                    let plugins = [ // post css plugins, can be exported to postcss.config.js
+                                        require('precss')
+                                    ];
+                                    if (options.mode === 'production') {
+                                        plugins.push(require('cssnano')({
+                                            preset: 'default'
+                                        }));
+                                    }
+                                    return plugins;
+                                }
+                            }
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                sourceMap: true
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+
+        /**
+         * Add additional plugins to the compiler.
+         *
+         * See: http://webpack.github.io/docs/configuration.html#plugins
+         */
+        plugins: [
+            /**
+             * This plugin extract CSS into separate files.
+             * It creates a CSS file per JS file which contains CSS.
+             *
+             * See: https://github.com/webpack-contrib/mini-css-extract-plugin
+             */
+            new MiniCssExtractPlugin({
+                filename: options.mode == 'development' ? 'jquery.[name].dev.css' : 'jquery.[name].min.css',
+            })
+        ],
+
+        /**
+         * Choose a style of source mapping to enhance the debugging process.
+         * These values can affect build and rebuild speed dramatically.
+         *
+         * See: https://webpack.js.org/configuration/devtool/
+         */
+        devtool: 'cheap-module-source-map'
 
     };
 };
