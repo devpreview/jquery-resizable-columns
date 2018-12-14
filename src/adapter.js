@@ -1,3 +1,4 @@
+import $ from 'jquery';
 import ResizableColumns from './class';
 import {DATA_API} from './constants';
 

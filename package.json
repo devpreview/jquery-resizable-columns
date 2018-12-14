@@ -2,7 +2,7 @@
   "name": "jquery-resizable-columns",
   "title": "jQuery Resizable Columns",
   "description": "Resizable table columns for jQuery",
-  "version": "0.2.3",
+  "version": "0.3.0-SNAPSHOT",
   "author": "Adam Becker <ad@mbecker.cc> (http://ada.mbecker.cc)",
   "homepage": "http://dobtco.github.io/jquery-resizable-columns/",
   "license": "MIT",
@@ -23,24 +23,34 @@
     "resizable",
     "adam becker"
   ],
-  "main": "dist/jquery.resizableColumns.js",
-  "devDependencies": {
-    "babel": "^5.3.3",
-    "babelify": "^6.1.0",
-    "browserify": "^10.2.0",
-    "gulp": "^3.8.11",
-    "gulp-babel": "^5.1.0",
-    "gulp-header": "^1.2.2",
-    "gulp-less": "^3.0.3",
-    "gulp-rename": "^1.2.2",
-    "gulp-sourcemaps": "^1.5.2",
-    "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.4",
-    "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
-  },
+  "style": "dist/jquery.resizableColumns.min.css",
+  "sass": "src/index.scss",
+  "main": "dist/jquery.resizableColumns.min.js",
   "scripts": {
-    "build": "npm install && gulp",
-    "start": "gulp"
+    "prebuild:dev": "npm run clean:dev",
+    "prebuild:prod": "npm run clean:prod",
+    "build:dev": "webpack --mode=development --config webpack.config.js --progress --profile --bail",
+    "build:prod": "webpack --mode=production --config webpack.config.js --progress --profile --bail --display-optimization-bailout",
+    "build": "npm run build:prod",
+    "clean:dev": "rimraf -- dist/*.dev.*",
+    "clean:prod": "rimraf -- dist/*.min.*",
+    "clean": "npm run clean:dev && npm run clean:prod && rimraf -- dist",
+    "clean:all": "npm run clean && rimraf -- node_modules package-lock.json"
+  },
+  "peerDependencies": {
+    "jquery": ">=1.9.0"
+  },
+  "devDependencies": {
+    "css-loader": "2.0.1",
+    "cssnano": "4.1.7",
+    "jquery": "3.3.1",
+    "mini-css-extract-plugin": "0.5.0",
+    "node-sass": "4.11.0",
+    "postcss-loader": "3.0.0",
+    "precss": "4.0.0",
+    "rimraf": "2.6.2",
+    "sass-loader": "7.1.0",
+    "webpack": "4.27.1",
+    "webpack-cli": "3.1.2"
   }
 }

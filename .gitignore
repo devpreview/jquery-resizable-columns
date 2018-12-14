@@ -1,4 +1,7 @@
+# NPM
 /package-lock.json
 /node_modules
-/.sass-cache
+# IDEA
 /.idea
+# Build
+/dist/
