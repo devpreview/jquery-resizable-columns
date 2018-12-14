@@ -23,12 +23,16 @@
     "resizable",
     "adam becker"
   ],
-  "main": "dist/jquery.resizableColumns.js",
+  "main": "dist/jquery.resizableColumns.min.js",
   "scripts": {
+    "prebuild:dev": "npm run clean:dev",
+    "prebuild:prod": "npm run clean:prod",
     "build:dev": "webpack --mode=development --config webpack.config.js --progress --profile --bail",
     "build:prod": "webpack --mode=production --config webpack.config.js --progress --profile --bail --display-optimization-bailout",
     "build": "npm run build:prod",
-    "clean": "rimraf -- dist",
+    "clean:dev": "rimraf -- dist/*.dev.*",
+    "clean:prod": "rimraf -- dist/*.min.*",
+    "clean": "npm run clean:dev && npm run clean:prod && rimraf -- dist",
     "clean:all": "npm run clean && rimraf -- node_modules package-lock.json"
   },
   "peerDependencies": {

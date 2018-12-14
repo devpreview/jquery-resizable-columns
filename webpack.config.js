@@ -21,7 +21,9 @@ const helpers = {
  *
  * See: https://webpack.js.org/configuration/
  */
-module.exports = (options = {}) => {
+module.exports = (options = {}, argv = {}) => {
+    options.mode = argv.mode !== 'development' ? 'production' : 'development';
+
     return {
         /**
          * Instructs webpack to target a specific environment.
@@ -29,6 +31,13 @@ module.exports = (options = {}) => {
          * See: https://webpack.js.org/concepts/targets/
          */
         target: "web",
+
+        /**
+         * Providing the mode configuration option tells webpack to use its built-in optimizations accordingly.
+         *
+         * See: https://webpack.js.org/concepts/mode/
+         */
+        mode: options.mode,
 
         /**
          * These options change how modules are resolved.
@@ -59,7 +68,31 @@ module.exports = (options = {}) => {
         * See: http://webpack.github.io/docs/configuration.html#entry
         */
         entry: {
-            'index': helpers.root('src', 'index.js')
+            'resizableColumns': helpers.root('src', 'index.js')
         },
+
+        /**
+         * Options affecting the output of the compilation.
+         *
+         * See: https://webpack.js.org/concepts/output/
+         * See: https://webpack.js.org/configuration/output/
+         */
+        output: {
+            /**
+             * Specifies the name of each output file on disk.
+             * IMPORTANT: You must not specify an absolute path here!
+             *
+             * See: https://webpack.js.org/configuration/output/#output-filename
+             */
+            filename: options.mode == 'development' ? 'jquery.[name].dev.js' : 'jquery.[name].min.js',
+
+            /**
+             * The output directory as absolute path (required).
+             *
+             * See: https://webpack.js.org/configuration/output/#output-path
+             */
+            path: helpers.root('dist')
+        },
+
     };
 };
